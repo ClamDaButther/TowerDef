@@ -161,7 +161,7 @@ Prefab:
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4d9743e33602a2e4eab3fc374f896313, type: 2}
+      objectReference: {fileID: 2100000, guid: cfb50cf37501f3c41bbe82f278699d6d, type: 2}
     - target: {fileID: 23945912665635994, guid: 3481e2c2aa70d774a82f5ecb6119bdc0,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
@@ -221,6 +221,22 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4d9743e33602a2e4eab3fc374f896313, type: 2}
+    - target: {fileID: 4828622753192362, guid: 3481e2c2aa70d774a82f5ecb6119bdc0, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 4828622753192362, guid: 3481e2c2aa70d774a82f5ecb6119bdc0, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.273
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434411585904532, guid: 3481e2c2aa70d774a82f5ecb6119bdc0, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434411585904532, guid: 3481e2c2aa70d774a82f5ecb6119bdc0, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.108
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3481e2c2aa70d774a82f5ecb6119bdc0, type: 2}
   m_IsPrefabAsset: 0
@@ -430,20 +446,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &1867314895 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100096, guid: 398da42bc4f6f6e44852a9f96c6c4e41,
-    type: 2}
-  m_PrefabInternal: {fileID: 1449316397}
---- !u!114 &1867314896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1867314895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0522b29c9b2034f4c81a7cad61b2a3c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isGrounded: 0
