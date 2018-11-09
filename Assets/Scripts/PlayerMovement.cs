@@ -24,8 +24,8 @@ public class PlayerMovement : MonoBehaviour {
         col_size = GetComponent<CapsuleCollider>();
         isGrounded = true;
 	}
-	
-	void Update () {
+
+    void Update() {
 
         //toggle crouching
         if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -53,23 +53,64 @@ public class PlayerMovement : MonoBehaviour {
         transform.Translate(0, 0, z);
         transform.Rotate(0, y, 0);
 
-        if(Input.GetKey(KeyCode.Space) && isGrounded == true)
+        if (Input.GetKey(KeyCode.Space) && isGrounded == true)
         {
             rb.AddForce(0, jumpHeight, 0);
             anim.SetTrigger("isJumping");
             isCrouching = false;
             isGrounded = false;
         }
-        
+
         if (isCrouching)
         {
-            anim.SetBool("isWalking", true);
-            anim.SetBool("isRunning", false);
-            anim.SetBool("isIdle", false);
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
 
+            if (Input.GetKey(KeyCode.W))
+            {
+                anim.SetBool("isWalking", true);
+                anim.SetBool("isRunning", false);
+                anim.SetBool("isIdle", false);
+            }
+
+            else if (Input.GetKey(KeyCode.S))
+            {
+                anim.SetBool("isWalking", true);
+                anim.SetBool("isRunning", false);
+                anim.SetBool("isIdle", false);
+            }
+
+            else
+            {
+                anim.SetBool("isWalking", false);
+                anim.SetBool("isRunning", false);
+                anim.SetBool("isIdle", true);
+            }
         }
-	}
+
+            else if (Input.GetKey(KeyCode.LeftShift))
+        {
+            speed = r_speed;
+            
+            if(Input.GetKey(KeyCode.W))
+            {
+                anim.SetBool("isWalking", true);
+                anim.SetBool("isRunning", false);
+                anim.SetBool("isIdle", false);
+            }
+
+            else if (Input.GetKey(KeyCode.S))
+            {
+                anim.SetBool("isWalking", false);
+                anim.SetBool("isRunning", true);
+                anim.SetBool("isIdle", false);
+            }
+
+            else
+            {
+                anim.SetBool("isWalking", false);
+                anim.SetBool("isRunning", false);
+                anim.SetBool("isIdle", true);
+            }
+        }
+        
+    }
 }
