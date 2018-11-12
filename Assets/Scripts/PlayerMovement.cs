@@ -35,19 +35,29 @@ public class PlayerMovement : MonoBehaviour {
             {
                 isCrouching = false;
                 anim.SetBool("isCrouching", false);
-                col_size.height = 2;
-                col_size.center = new Vector3(0, 1, 0);
+                col_size.height = 0.5f;
+                col_size.center = new Vector3(0, 0.225f, -0.01f);
             }
             else
             {
                 isCrouching = true;
                 anim.SetBool("isCrouching", true);
                 speed = c_speed;
-                col_size.height = 1;
-                col_size.center = new Vector3(0, 0.5f, 0);
+                col_size.height = 0.5f;
+                col_size.center = new Vector3(0, 0.45f, -0.01f);
+            }
+
+
+            if (Input.GetKeyDown(KeyCode.LeftControl))
+            {
+                isCrouching = true;
+            }
+
+            if (Input.GetKeyUp(KeyCode.LeftControl))
+            {
+                isCrouching = false;
             }
         }
-
         var z = Input.GetAxis("Vertical") * speed;
         var y = Input.GetAxis("Horizontal") * rotSpeed;
 
@@ -56,10 +66,14 @@ public class PlayerMovement : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.Space) && isGrounded == true)
         {
-            rb.AddForce(0, jumpHeight, 0);
             anim.SetTrigger("isJumping");
             isCrouching = false;
             isGrounded = false;
+            rb.AddForce(0, jumpHeight, 0);
+        } 
+        else if (isGrounded == true && anim.GetBool("isJumping") == true)
+        {
+            anim.SetBool("isJumping", false);
         }
 
         if (isCrouching)
