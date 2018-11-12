@@ -8,9 +8,9 @@ public class PlayerMovement : MonoBehaviour {
     public bool isCrouching;
 
     private float speed;
-    private float w_speed = 0.05f;
-    private float r_speed = 0.1f;
-    private float c_speed = 0.025f;
+    private float w_speed = 0.4f;
+    private float r_speed = 0.6f;
+    private float c_speed = 0.3f;
     public float rotSpeed;
     public float jumpHeight;
     Rigidbody rb;
@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
     void Update() {
+
 
         //toggle crouching
         if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -63,7 +64,7 @@ public class PlayerMovement : MonoBehaviour {
 
         if (isCrouching)
         {
-
+            //Crouching Controls
             if (Input.GetKey(KeyCode.W))
             {
                 anim.SetBool("isWalking", true);
@@ -87,10 +88,36 @@ public class PlayerMovement : MonoBehaviour {
         }
 
             else if (Input.GetKey(KeyCode.LeftShift))
+            {
+                 speed = r_speed;
+                 //rennen controls
+                 if(Input.GetKey(KeyCode.W))
+                 {
+                     anim.SetBool("isWalking", true);
+                      anim.SetBool("isRunning", false);
+                      anim.SetBool("isIdle", false);
+                  }
+
+                 else if (Input.GetKey(KeyCode.S))
+                     {
+                     anim.SetBool("isWalking", false);
+                     anim.SetBool("isRunning", true);
+                     anim.SetBool("isIdle", false);
+                     }
+
+                 else
+                     {
+                     anim.SetBool("isWalking", false);
+                     anim.SetBool("isRunning", false);
+                     anim.SetBool("isIdle", true);
+                     }
+            }
+
+        else if (!isCrouching)
         {
-            speed = r_speed;
-            
-            if(Input.GetKey(KeyCode.W))
+            //staan Controls
+            speed = w_speed;
+            if (Input.GetKey(KeyCode.W))
             {
                 anim.SetBool("isWalking", true);
                 anim.SetBool("isRunning", false);
@@ -99,8 +126,8 @@ public class PlayerMovement : MonoBehaviour {
 
             else if (Input.GetKey(KeyCode.S))
             {
-                anim.SetBool("isWalking", false);
-                anim.SetBool("isRunning", true);
+                anim.SetBool("isWalking", true);
+                anim.SetBool("isRunning", false);
                 anim.SetBool("isIdle", false);
             }
 
@@ -111,6 +138,11 @@ public class PlayerMovement : MonoBehaviour {
                 anim.SetBool("isIdle", true);
             }
         }
-        
+
+    }
+
+    void OnCollisionEnter()
+    {
+        isGrounded = true;
     }
 }
