@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour {
     public bool isGrounded;
     public bool isCrouching;
 
+    [SerializeField]
+    private bool ff = false;
     private float speed;
     private float w_speed = 0.4f;
     private float r_speed = 0.6f;
@@ -64,13 +66,20 @@ public class PlayerMovement : MonoBehaviour {
         transform.Translate(0, 0, z);
         transform.Rotate(0, y, 0);
 
-        if (Input.GetKey(KeyCode.Space) && isGrounded == true)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded == true)
         {
+
             anim.SetTrigger("isJumping");
             isCrouching = false;
-            isGrounded = false;
-            rb.AddForce(0, jumpHeight, 0);
-        } 
+            if(ff == false) {
+                StartCoroutine(Springen(0.3F));
+                StartCoroutine(Wacht(1.1F));
+            }
+
+            
+        }
+
+
         else if (isGrounded == true && anim.GetBool("isJumping") == true)
         {
             anim.SetBool("isJumping", false);
@@ -153,10 +162,38 @@ public class PlayerMovement : MonoBehaviour {
             }
         }
 
+
+
     }
 
     void OnCollisionEnter()
     {
         isGrounded = true;
+        ff = false;
     }
+
+    void OnCollisionExit()
+    {
+        isGrounded = false;
+    }
+
+    IEnumerator Springen(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        rb.AddForce(0, jumpHeight, 0);
+        col_size.height = 0.5f;
+        col_size.center = new Vector3(0, 0.8f, -0.01f);
+
+        yield return new WaitForSeconds(0.7f);
+        col_size.height = 1f;
+        col_size.center = new Vector3(0, 0.45f, -0.01f);
+    }
+
+    IEnumerator Wacht(float waitTime3)
+    {
+        ff = true;
+        yield return new WaitForSeconds(waitTime3);
+
+    }
+
 }
